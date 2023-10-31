@@ -90,17 +90,18 @@ const removeAll = async (req, res) => {
 	}
 }
 
-const searchByName=async(req, res, next, name)=>{
+const searchByName=async(req, res)=>{
 	try{
 		const keyword=req.query.name
-	let products=await product.find({ name: { $regex: keyword, $options: 'i' } });
+	const products=await product.find({ name: { $regex: keyword, $options: 'i' } });
 	//if(!products|| products.length===0){
 	//return res.status('400').json({
 	//error: "product not found"
 	
 	//});
 //}
-	res.status(200).jason(products);
+res.json(products);
+	//res.status(200).json(products);
 	//next();
 	}catch(err){
 	return res.status('400').json({ 
